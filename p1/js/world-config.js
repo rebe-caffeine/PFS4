@@ -26,7 +26,7 @@ export const WORLD_CONFIG = {
     // Tamano general de la sala de trabajo.
     // halfSize=4.5 implica sala de 9x9 aprox en plano XZ.
     room: {
-        halfSize: 4.5,
+        halfSize: 15, // 🔴AUMENTADO PARA DAR MÁS ESPACIO DE EXPLORACIÓN
         wallDistanceOffset: 0.5,
     },
 
@@ -132,7 +132,7 @@ export const WORLD_CONFIG = {
     // Obstaculos circulares simples para colision de jugador (en XZ).
     // Util para proteger objetos centrales o areas importantes.
     obstacles: [
-        { x: 0, z: 0, r: 0.95 },
+        // { x: 0, z: 0, r: 0.95 }, 🔴CAMBIO PARA ELIMINAR EL OBSTÁCULO MANUAL
     ],
 
     // Herramientas de depuracion visual.

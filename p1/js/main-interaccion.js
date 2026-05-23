@@ -355,7 +355,7 @@ function loadWorldModel() {
             loadedWorldModel = gltf.scene;
             scene.add(loadedWorldModel);
             fitWorldModel(loadedWorldModel);
-            refreshWorldModelObstacle();
+            // refreshWorldModelObstacle(); 🔴CAMBIO PARA DESACTIVAR EL CALCULO AUTOMATICO DE COLISIÓN
             console.log('[B6] Modelo de mundo cargado:', modelUrl);
         },
         undefined,
