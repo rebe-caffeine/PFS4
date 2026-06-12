@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!--
+        INDEX PRINCIPAL (Three.js)
+
+        Este archivo NO contiene logica de interaccion.
+        Su rol es preparar la pagina y cargar `main-interaccion.js`.
+
+        Para personalizar el mundo (modelo, zonas, objetivos), editar:
+        - `js/world-config.js`
+        Para cambiar comportamiento de motor/interaccion, editar:
+        - `js/main-interaccion.js`
+    -->
+
+    <!-- Configuracion base de documento (acentos + viewport responsivo) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Estilos compartidos para HUD y canvas fullscreen -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Titulo visible en la pestana del navegador -->
+    <title>LEGO: Night Hours</title>
+</head>
+<body>
+    <!-- HUD superior: se actualiza en runtime con estado de objetivos -->
+    <div id="info">Interaction | LEGO: Night Hours Interactive | Loading...</div>
+
+    <!-- Panel lateral para mensajes de zonas de interes -->
+    <div
+        id="detailsPanel"
+        style="
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            z-index: 10;
+            max-width: min(92vw, 420px);
+            padding: 12px 14px;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.56);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            font-size: clamp(14px, 1.4vw, 19px);
+            line-height: 1.45;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+        "
+    >
+        <strong>Welcome to LEGO: Night Hours. See the dark in a whole new light</strong><br>
+        The mind plays differently when the sun goes down and true imagination never sleeps. 
+        It simply waits for the shadows... to reveal a sharper kind of brilliance.
+        Begin by collecting the light sources hidden in the world.
+    </div>
+
+    <!--
+        Script principal del proyecto.
+        `type="module"` permite imports ES (Three, VRButton, loaders, etc.).
+        El canvas WebGL se crea dinamicamente desde JS.
+    -->
+    <script type="module" src="./js/main-interaccion.js"></script>
+</body>
+</html>
