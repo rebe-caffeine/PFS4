@@ -289,7 +289,7 @@ function createEnvironment() {
     moonLight.castShadow = true;
     scene.add(moonLight);
 
-    // 3. Luz de acento neón (rosa/morado) para darle estilo
+    // 3. Luz neon
     const neonLight = new THREE.PointLight(0xD60000, 3.0, 10);
     neonLight.position.set(0, 2, 0); // Ajusta estas coordenadas si quieres mover el neón
     scene.add(neonLight);
@@ -525,7 +525,6 @@ function createCollectibles() {
         const item = list[i];
         const position = vec3FromConfig(item.position, { x: 0, y: 0.45, z: 0 });
 
-        // Usamos un grupo como contenedor para evitar errores de carga asíncrona
         const group = new THREE.Group();
         group.name = item.id || `orbe_${i + 1}`;
         group.position.copy(position);
@@ -539,7 +538,6 @@ function createCollectibles() {
             phase: Math.random() * Math.PI * 2,
         });
 
-        // Cargar el modelo .glb de tu pieza de lego
         if (item.url) {
             loader.load(
                 item.url,
@@ -1352,7 +1350,7 @@ function setupAudioAndGuide() {
         guideGroup.add(model);
         guideMeshRef = model; 
 
-        // Metemos el audio AQUÍ ADENTRO para que reconozca a "model"
+
         sfxGuide = new THREE.PositionalAudio(audioListener);
         audioLoader.load('./audio/legomeme.mp3', (buffer) => {  
             sfxGuide.setBuffer(buffer);

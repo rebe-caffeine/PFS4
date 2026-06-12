@@ -148,7 +148,7 @@ export const WORLD_CONFIG = {
     // Obstaculos circulares simples para colision de jugador (en XZ).
     // Util para proteger objetos centrales o areas importantes.
     obstacles: [
-        // { x: 0, z: 0, r: 0.95 }, 🔴CAMBIO PARA ELIMINAR EL OBSTÁCULO MANUAL
+        // { x: 0, z: 0, r: 0.95 }, 🔴CAMBIO PARA ELIMINAR EL OBSTÁCULO MANUAL ?
     ],
 
     // Herramientas de depuracion visual.
