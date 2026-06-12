@@ -280,7 +280,7 @@ renderer.setAnimationLoop(() => {
 
 function createEnvironment() {
     // 1. Luz ambiental oscura (vibra de noche)
-    const ambientLight = new THREE.AmbientLight(0x0a0a1a, 2.0); 
+    const ambientLight = new THREE.AmbientLight(0x0A1526, 2.0); 
     scene.add(ambientLight);
 
     // 2. Luz de luna direccional (crea las sombras)
@@ -290,11 +290,49 @@ function createEnvironment() {
     scene.add(moonLight);
 
     // 3. Luz de acento neón (rosa/morado) para darle estilo
-    const neonLight = new THREE.PointLight(0xd500f9, 3.0, 10);
+    const neonLight = new THREE.PointLight(0xD60000, 3.0, 10);
     neonLight.position.set(0, 2, 0); // Ajusta estas coordenadas si quieres mover el neón
     scene.add(neonLight);
 
-    // --- EL SUELO Y GRID QUE YA TENÍAS ---
+    const neonLight2 = new THREE.PointLight(0x00D6D6, 3.0, 8);
+    neonLight2.position.set(1, 2, 0); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight2);
+
+    const neonLight3 = new THREE.PointLight(0xFFDC00, 3.0, 8);
+    neonLight3.position.set(2, 2, 0); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight3);
+
+    const neonLight4 = new THREE.PointLight(0xFC7A3D, 2.0, 7);
+    neonLight4.position.set(-2, 1.8, 0); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight4);
+
+    const neonLight5 = new THREE.PointLight(0xFC7A3D, 2.0, 7);
+    neonLight5.position.set(1.5, 1.8, 0); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight5);
+
+    const neonLight6 = new THREE.PointLight(0x00E8AE, 2.0, 7);
+    neonLight6.position.set(0, 1.0, 1.0); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight6);
+
+
+    const neonLight7 = new THREE.PointLight(0xE80000, 1.0, 7);
+    neonLight7.position.set(-2, 5, 4.6); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight7);
+
+    const neonLight8 = new THREE.PointLight(0xE8E000, 1.0, 7);
+    neonLight8.position.set(-1.6, 5, 4.6); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight8);
+    
+    const neonLight9 = new THREE.PointLight(0x5DE800, 1.0, 7);
+    neonLight9.position.set(-1.1, 5, 4.6); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight9);
+
+    const neonLight10 = new THREE.PointLight(0x00B6E3, 1.0, 7);
+    neonLight10.position.set(-0.6, 5, 4.6); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight10);
+
+
+
     const groundGeo = new THREE.PlaneGeometry(ROOM_HALF_SIZE * 2 + 3, ROOM_HALF_SIZE * 2 + 3);
     const groundMat = new THREE.MeshStandardMaterial({ color: 0x2a2a2a, roughness: 0.95, metalness: 0.05 });
     ground = new THREE.Mesh(groundGeo, groundMat);
