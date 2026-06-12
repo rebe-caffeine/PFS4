@@ -1286,7 +1286,10 @@ function setupAudioAndGuide() {
 
     gltfLoader.load('./models/legoman.glb', (gltf) => { // <-- PON AQUÍ EL NOMBRE DEL .GLB DE TU MONITO
         const model = gltf.scene;
-        model.scale.setScalar(1.0); // Ajusta la escala si es necesario
+        model.scale.setScalar(0.4); // Ajusta la escala si es necesario
+        model.position.y = 0.2; // Ajusta la posición en Y si es necesario
+        model.position.x = -2.1; // Centra el modelo en X dentro del grupo
+        model.position.z = 6.5; // Centra el modelo en Z dentro del grupo
         guideGroup.add(model);
     });
     

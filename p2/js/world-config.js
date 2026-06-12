@@ -99,10 +99,10 @@ export const WORLD_CONFIG = {
     // Puedes agregar mas elementos siguiendo el mismo formato.
     //AQUÍ ESTOY CAMBIANDO LOS ORBES POR PIEZAS DE LEGO🔴🔴🔴🔴
     collectibles: [
-        { id: 'lego_1', position: { x: -1.6, y: 0.45, z: -0.9 }, url: './models/legoblock1.glb', scale: 1.0 },
-        { id: 'lego_2', position: { x: 1.5, y: 0.45, z: -0.5 }, url: './models/legoblock2.glb', scale: 1.0 },
-        { id: 'lego_3', position: { x: 0.1, y: 0.45, z: 1.0 }, url: './models/legoblock3.glb', scale: 1.0 },
-        { id: 'lego_4', position: { x: -0.8, y: 0.45, z: 1.2 }, url: './models/legoblock1.glb', scale: 1.0 }
+        { id: 'lego_1', position: { x: -1.6, y: 0.9, z: -0.9 }, url: './models/legoblock1.glb', scale: 0.1 },
+        { id: 'lego_2', position: { x: 1.5, y: 0.9, z: 3.0 }, url: './models/legoblock2.glb', scale: 1.5 },
+        { id: 'lego_3', position: { x: 0.7, y: 0.9, z: 0.9 }, url: './models/legoblock3.glb', scale: 1.5 },
+        { id: 'lego_4', position: { x: -1, y: 0.8, z: 1.2 }, url: './models/legoblock1.glb', scale: 0.1 }
     ],
 
     // Zonas narrativas: actualizan panel de detalles al entrar.
