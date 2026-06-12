@@ -1257,10 +1257,6 @@ function vec3FromConfig(value, fallback) {
 // ============================================================================
 // 8) SISTEMA DE AUDIO Y GUÍA LEGO (CON MODELO .GLB)
 // ============================================================================
-// let audioReady = false;
-// let sfxPickup = null;
-// let sfxGuide = null;
-// let bgm = null;
 
 function setupAudioAndGuide() {
     const audioListener = new THREE.AudioListener();
