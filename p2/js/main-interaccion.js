@@ -279,15 +279,22 @@ renderer.setAnimationLoop(() => {
 // ============================================================================
 
 function createEnvironment() {
-    // Escena base: luces + suelo + rejilla + paredes de orientacion.
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x1a1a1a, 0.72);
-    scene.add(hemi);
+    // 1. Luz ambiental oscura (vibra de noche)
+    const ambientLight = new THREE.AmbientLight(0x0a0a1a, 2.0); 
+    scene.add(ambientLight);
 
-    const dir = new THREE.DirectionalLight(0xffffff, 0.9);
-    dir.position.set(4, 7, 3);
-    dir.castShadow = true;
-    scene.add(dir);
+    // 2. Luz de luna direccional (crea las sombras)
+    const moonLight = new THREE.DirectionalLight(0x7799ff, 1.5);
+    moonLight.position.set(4, 7, 3);
+    moonLight.castShadow = true;
+    scene.add(moonLight);
 
+    // 3. Luz de acento neón (rosa/morado) para darle estilo
+    const neonLight = new THREE.PointLight(0xd500f9, 3.0, 10);
+    neonLight.position.set(0, 2, 0); // Ajusta estas coordenadas si quieres mover el neón
+    scene.add(neonLight);
+
+    // --- EL SUELO Y GRID QUE YA TENÍAS ---
     const groundGeo = new THREE.PlaneGeometry(ROOM_HALF_SIZE * 2 + 3, ROOM_HALF_SIZE * 2 + 3);
     const groundMat = new THREE.MeshStandardMaterial({ color: 0x2a2a2a, roughness: 0.95, metalness: 0.05 });
     ground = new THREE.Mesh(groundGeo, groundMat);
@@ -298,10 +305,6 @@ function createEnvironment() {
     const grid = new THREE.GridHelper(ROOM_HALF_SIZE * 2 + 3, 28, 0x343434, 0x242424);
     grid.position.y = 0.01;
     scene.add(grid);
-
-    // createWall(new THREE.Vector3(0, 2, -ROOM_WALL_DISTANCE), 0, 0x6b2a2a, 'FRENTE');
-    // createWall(new THREE.Vector3(-ROOM_WALL_DISTANCE, 2, 0), Math.PI / 2, 0x224070, 'IZQUIERDA');
-    // createWall(new THREE.Vector3(ROOM_WALL_DISTANCE, 2, 0), -Math.PI / 2, 0x266b3b, 'DERECHA');
 }
 
 function createWall(position, rotationY, color, labelText) {
@@ -1297,29 +1300,29 @@ function setupAudioAndGuide() {
         bgm.setVolume(0.15); 
     });
 
-    // 3. Crear contenedor del lego
+// 3 y 4. Crear contenedor, cargar modelo y pegarle el audio
     const guideGroup = new THREE.Group();
     guideGroup.position.set(2, 0, -2); 
     scene.add(guideGroup);
 
-    gltfLoader.load('./models/legoman.glb', (gltf) => { // <-- PON AQUÍ EL NOMBRE DEL .GLB DE TU MONITO
+    gltfLoader.load('./models/legoman.glb', (gltf) => { 
         const model = gltf.scene;
-        model.scale.setScalar(0.4); // Ajusta la escala si es necesario
-        model.position.y = 0.2; // Ajusta la posición en Y si es necesario
-        model.position.x = -2.1; // Centra el modelo en X dentro del grupo
-        model.position.z = 6.5; // Centra el modelo en Z dentro del grupo
+        model.scale.setScalar(0.4); 
+        model.position.y = 0.2; 
+        model.position.x = -2.1; 
+        model.position.z = 6.5; 
         guideGroup.add(model);
-        guideMeshRef = model; //🔴🔴
-    });
-    
-    // 4. Audio espacial anclado al Guía
-    sfxGuide = new THREE.PositionalAudio(audioListener);
-    audioLoader.load('./audio/legomeme.mp3', (buffer) => { // 
-        sfxGuide.setBuffer(buffer);
-        sfxGuide.setRefDistance(1.0); 
-        sfxGuide.setRolloffFactor(2.5); 
-        sfxGuide.setLoop(true);
-        model.add(sfxGuide); //🔴🔴
+        guideMeshRef = model; 
+
+        // Metemos el audio AQUÍ ADENTRO para que reconozca a "model"
+        sfxGuide = new THREE.PositionalAudio(audioListener);
+        audioLoader.load('./audio/legomeme.mp3', (buffer) => {  
+            sfxGuide.setBuffer(buffer);
+            sfxGuide.setRefDistance(1.0); 
+            sfxGuide.setRolloffFactor(2.5); 
+            sfxGuide.setLoop(true);
+            model.add(sfxGuide); // Ahora sí sabe quién es model
+        });
     });
 
     // 5. Desbloqueo de audio por reglas de navegador
