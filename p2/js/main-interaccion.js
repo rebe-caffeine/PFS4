@@ -36,6 +36,7 @@ let audioReady = false;
 let sfxPickup = null;
 let sfxGuide = null;
 let bgm = null;
+let guideMeshRef = null; //🔴🔴🔴
 
 // Recomendacion docente:
 // si quieres modificar la experiencia, primero prueba hacerlo desde
@@ -930,6 +931,23 @@ function tryInteractAtPosition(position) {
         return false;
     }
 
+    //🔴🔴==============================================
+    if (guideMeshRef) {
+        const guidePos = new THREE.Vector3();
+        guideMeshRef.getWorldPosition(guidePos);
+        if (position.distanceTo(guidePos) <= INTERACT_DISTANCE) {
+            if (sfxGuide && sfxGuide.isPlaying) {
+                sfxGuide.stop();
+                setStatusMessage('Audio del guía apagado.', 1.5);
+            } else if (sfxGuide && sfxGuide.buffer) {
+                sfxGuide.play();
+                setStatusMessage('Audio del guía encendido.', 1.5);
+            }
+            return true; 
+        }
+    }
+    //🔴🔴==============================================
+
     setStatusMessage('No hay un elemento interactivo cerca.', 1.4);
     return false;
 }
@@ -1279,9 +1297,9 @@ function setupAudioAndGuide() {
         bgm.setVolume(0.15); 
     });
 
-    // 3. Crear contenedor del Monito Guía y cargar su modelo .glb
+    // 3. Crear contenedor del lego
     const guideGroup = new THREE.Group();
-    guideGroup.position.set(2, 0, -2); // Posición cerca de tu zona_guia
+    guideGroup.position.set(2, 0, -2); 
     scene.add(guideGroup);
 
     gltfLoader.load('./models/legoman.glb', (gltf) => { // <-- PON AQUÍ EL NOMBRE DEL .GLB DE TU MONITO
@@ -1291,16 +1309,17 @@ function setupAudioAndGuide() {
         model.position.x = -2.1; // Centra el modelo en X dentro del grupo
         model.position.z = 6.5; // Centra el modelo en Z dentro del grupo
         guideGroup.add(model);
+        guideMeshRef = model; //🔴🔴
     });
     
     // 4. Audio espacial anclado al Guía
     sfxGuide = new THREE.PositionalAudio(audioListener);
-    audioLoader.load('./audio/legomeme.mp3', (buffer) => { // <-- PON AQUÍ EL AUDIO QUE DICE TU MONITO
+    audioLoader.load('./audio/legomeme.mp3', (buffer) => { // 
         sfxGuide.setBuffer(buffer);
-        sfxGuide.setRefDistance(1.0); // La distancia ideal para que suene fuerte
-        sfxGuide.setRolloffFactor(2.5); // Hace que se apague rápido al alejarte
+        sfxGuide.setRefDistance(1.0); 
+        sfxGuide.setRolloffFactor(2.5); 
         sfxGuide.setLoop(true);
-        guideGroup.add(sfxGuide); // Se lo pegamos al monito
+        model.add(sfxGuide); //🔴🔴
     });
 
     // 5. Desbloqueo de audio por reglas de navegador
@@ -1310,7 +1329,6 @@ function setupAudioAndGuide() {
                 await audioListener.context.resume();
             }
             bgm.play();
-            if (sfxGuide && sfxGuide.buffer) sfxGuide.play();
             audioReady = true;
         }
     }, { once: true });
