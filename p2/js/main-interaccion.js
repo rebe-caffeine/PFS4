@@ -32,6 +32,11 @@ import { WORLD_CONFIG } from './world-config.js';
 
 const CFG = WORLD_CONFIG;
 
+let audioReady = false;
+let sfxPickup = null;
+let sfxGuide = null;
+let bgm = null;
+
 // Recomendacion docente:
 // si quieres modificar la experiencia, primero prueba hacerlo desde
 // `world-config.js` antes de tocar logica de este archivo.
@@ -1252,10 +1257,10 @@ function vec3FromConfig(value, fallback) {
 // ============================================================================
 // 8) SISTEMA DE AUDIO Y GUÍA LEGO (CON MODELO .GLB)
 // ============================================================================
-let audioReady = false;
-let sfxPickup = null;
-let sfxGuide = null;
-let bgm = null;
+// let audioReady = false;
+// let sfxPickup = null;
+// let sfxGuide = null;
+// let bgm = null;
 
 function setupAudioAndGuide() {
     const audioListener = new THREE.AudioListener();
